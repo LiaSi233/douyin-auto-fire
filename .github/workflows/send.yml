@@ -8,8 +8,9 @@ on:
         type: boolean
         default: false
   schedule:
-    - cron: "30 3 * * *"
-      timezone: "Asia/Shanghai"
+    # GitHub Actions 的 cron 固定按 UTC 解释，不支持 timezone 字段。
+    # 0 4 * * * = 北京时间每天 12:00。
+    - cron: "0 4 * * *"
 
 concurrency:
   group: douyin-daily-sender
