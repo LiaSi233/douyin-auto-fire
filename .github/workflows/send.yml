@@ -27,8 +27,8 @@ jobs:
       DOUYIN_CONFIG: ${{ secrets.DOUYIN_CONFIG }}
       DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
       DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
-      # 使用虚拟显示以有头模式运行，降低抖音对无头浏览器的风控概率
-      HEADLESS: "false"
+      # 使用无头模式运行（运行 #2 验证可正常登录并发起发送）
+      HEADLESS: "true"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
