@@ -27,7 +27,8 @@ jobs:
       DOUYIN_CONFIG: ${{ secrets.DOUYIN_CONFIG }}
       DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
       DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
-      HEADLESS: "true"
+      # 使用虚拟显示以有头模式运行，降低抖音对无头浏览器的风控概率
+      HEADLESS: "false"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -110,9 +111,9 @@ jobs:
         shell: bash
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.dry_run }}" == "true" ]]; then
-            python run.py --dry-run
+            xvfb-run -a python run.py --dry-run
           else
-            python run.py
+            xvfb-run -a python run.py
           fi
       - name: Upload diagnostics
         if: failure()
